@@ -66,8 +66,7 @@ $(function(){
     <div class="nav fleft">
     	<ul>
         	<div class="nav-left fleft"></div>
-        	<li><a href="updateAdmin.jsp" target=right>修改账户</a></li>
-            <li><a href="getKinds" target=right>赚钱频道</a></li>
+            <li><a href="getTieZis" target=right>帖子</a></li>
              <li><a href="getusers?page=1" target=right>用户</a></li>
              <li><a href="getEndOrder?page=1" target=right>已处理订单</a></li>
             <li><a href="showOverOrder?page=1" target=right>未处理订单</a></li>
