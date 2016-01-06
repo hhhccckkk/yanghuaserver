@@ -1,0 +1,20 @@
+#MyEclipse Hibernate Properties
+#Wed Jan 06 11:25:43 CST 2016
+genBasicCompId=false
+sessionFactoryName=com.hck.yanghua.bean.HibernateSessionFactory
+profile=
+daoSFId=
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=
+useJavaTypes=true
+keyGenerator=
+genVersionTag=false
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=
+configFile=/MyYangHua/src/applicationContext.xml
+createConfigFile=true

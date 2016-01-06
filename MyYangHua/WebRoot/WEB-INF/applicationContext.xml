@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://127.0.0.1/yanghua?characterEncoding=utf8">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="7878168"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/hck/yanghua/bean/Ad.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Admin.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Baike.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Banben.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Bjxiangxi.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Hua.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Huihuxiaoxi.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Huitie.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Jilv.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Jingyan.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Pinglun.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Tiezi.hbm.xml</value>
+				<value>com/hck/yanghua/bean/User.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Xinxi.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="adminDao" class="com.hck.yanghua.server.AdminServer"
+		scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdminAction" class="com.hck.yanghua.pcaction.AdminAction"
+		scope="prototype">
+		<property name="aServer">
+			<ref bean="adminDao" />
+		</property>
+	</bean>
+
+</beans>

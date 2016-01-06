@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE validation-config SYSTEM "validation-config.dtd">
+<validation-config lang="auto">
+	<form id="form1" show-error="alert" show-type="all">
+		<field name="admin.name" display-name="用户名" >
+			<depend name="required" />
+			<depend name="commonChar" />
+			<depend name="minLength" param0="6"></depend>
+			<depend name="maxLength" param0="12"></depend>
+		</field>
+		<field name="admin.password" display-name="密码" >
+			<depend name="required" />
+			<depend name="commonChar" />
+			<depend name="minLength" param0="6"></depend>
+			<depend name="maxLength" param0="12"></depend>
+		</field>
+	</form>
+	
+	
+	<form id="f2" show-error="alert" >
+		<field name="k.name" display-name="类别名字" >
+			<depend name="required" />
+			<depend name="chineseChar" />
+			<depend name="minLength" param0="1"></depend>
+			<depend name="maxLength" param0="5"></depend>
+		</field>
+	
+	</form>
+	
+	<form id="f3" show-error="alert" >
+		<field name="kind.kindName" display-name="类别名字" >
+			<depend name="required" />
+			<depend name="chineseChar" />
+			<depend name="minLength" param0="1"></depend>
+			<depend name="maxLength" param0="5"></depend>
+		</field>
+	
+	</form>
+	
+	<form id="f4" show-error="alert" >
+		<field name="user.userName" display-name="账号" >
+			<depend name="required" />
+			<depend name="commonChar" />
+			<depend name="minLength" param0="6"></depend>
+			<depend name="maxLength" param0="12"></depend>
+		</field>
+		<field name="user.password" display-name="密码" >
+			<depend name="required" />
+			<depend name="commonChar" />
+			<depend name="minLength" param0="6"></depend>
+			<depend name="maxLength" param0="12"></depend>
+		</field>
+		<field name="user.jifeng" display-name="积分" >
+			<depend name="integer" />
+			<depend name="maxLength" param0="9"></depend>
+			
+		</field>
+	
+	</form>
+	
+	<form id="f5" show-error="alert" >
+		<field name="liuyan.name" display-name="主题" >
+			<depend name="required" />
+			<depend name="minLength" param0="1"></depend>
+			<depend name="maxLength" param0="12"></depend>
+		</field>
+		<field name="liuyan.content" display-name="类容" >
+			<depend name="required" />
+			<depend name="minLength" param0="1"></depend>
+			<depend name="maxLength" param0="40"></depend>
+		</field>
+	
+	</form>
+	
+	<form id="f6" show-error="alert" >
+		<field name="key" display-name="关键字" >
+			<depend name="required" />
+			<depend name="minLength" param0="1"></depend>
+			<depend name="maxLength" param0="8"></depend>
+		</field>
+	</form>
+	<form id="f7" show-error="alert" >
+		<field name="key" display-name="关键字" >
+			<depend name="required" />
+			<depend name="minLength" param0="1"></depend>
+			<depend name="maxLength" param0="8"></depend>
+		</field>
+	</form>
+	<form id="f8" show-error="alert" >
+		<field name="message.name" display-name="账号" >
+			<depend name="required" />
+			<depend name="commonChar" />
+			<depend name="minLength" param0="6"></depend>
+			<depend name="maxLength" param0="12"></depend>
+		</field>
+		
+		<field name="message.title" display-name="主题" >
+			<depend name="required" />
+			<depend name="maxLength" param0="15"></depend>
+		</field>
+		<field name="message.content" display-name="主题" >
+			<depend name="required" />
+			<depend name="maxLength" param0="30"></depend>
+		</field>
+	</form>
+	
+	<form id="f9" show-error="alert" >
+		<field name="product.PName" display-name="商品名字" >
+			<depend name="required" />
+			<depend name="chineseChar" />
+			<depend name="minLength" param0="1"></depend>
+			<depend name="maxLength" param0="10"></depend>
+		</field>
+		<field name="file" display-name="图片" >
+			<depend name="required" />
+		</field>
+		<field name="product.PShichangPrice" display-name="市场价格" >
+			<depend name="required" />
+			<depend name="double" />
+			
+		</field>
+		<field name="product.PPrice" display-name="本店价格" >
+			<depend name="required" />
+			<depend name="double" />
+			
+		</field>
+		<field name="product.PCuxiaoPrice" display-name="促销价格" >
+			<depend name="double" />
+		</field>
+		<field name="product.PJifeng" display-name="可得积分" >
+			<depend name="integer" />
+		</field>
+		<field name="product.PIscuxiao" display-name="是否为促销" >
+			<depend name="required" />
+		</field>
+		<field name="product.PIstuijian" display-name="是否为特价" >
+			<depend name="required" />
+		</field>
+		<field name="product.PNum" display-name="商品数量" >
+			<depend name="integer" />
+		</field>
+		<field name="product.PContent" display-name="商品描述" >
+			<depend name="required" />
+			<depend name="maxLength" param0="40"></depend>
+		</field>
+	
+	</form>
+	<form id="f10" show-error="alert" >
+		<field name="key" display-name="关键字" >
+			<depend name="required" />
+			<depend name="minLength" param0="1"></depend>
+			<depend name="maxLength" param0="8"></depend>
+		</field>
+	</form>
+	
+	<form id="f11" show-error="alert" >
+		<field name="product.PName" display-name="商品名字" >
+			<depend name="required" />
+			<depend name="chineseChar" />
+			<depend name="minLength" param0="1"></depend>
+			<depend name="maxLength" param0="10"></depend>
+		</field>
+		<field name="product.PShichangPrice" display-name="市场价格" >
+			<depend name="required" />
+			<depend name="double" />
+		</field>
+		<field name="product.PPrice" display-name="本店价格" >
+			<depend name="required" />
+			<depend name="double" />
+		</field>
+		<field name="product.PCuxiaoPrice" display-name="促销价格" >
+			<depend name="double" />
+		</field>
+		<field name="product.PJifeng" display-name="可得积分" >
+			<depend name="integer" />
+		</field>
+		<field name="product.PIscuxiao" display-name="是否为促销" >
+			<depend name="required" />
+		</field>
+		<field name="product.PNum" display-name="商品数量" >
+			<depend name="integer" />
+		</field>
+		<field name="product.PContent" display-name="商品描述" >
+			<depend name="required" />
+			<depend name="maxLength" param0="40"></depend>
+		</field>
+	</form>
+</validation-config>
