@@ -6,6 +6,9 @@
 <struts>
 	<constant name="struts.devMode" value="false"></constant>
 	<package name="strutsphone" extends="json-default">
-	
+	<!-- 获取版本信息 -->
+		<action name="getBanBenInfoP" class="GetBanBenInfoActionP" method="getBanBenInfo">
+			<result type="json">null</result>
+		</action>
 	</package>
 </struts>

@@ -56,5 +56,20 @@
 			<ref bean="adminDao" />
 		</property>
 	</bean>
+	
+	<!-- 手机用 -->
+	<!-- 获取版本信息 -->
+	<bean id="banbenDao" class="com.hck.yanghua.server.BanBenServer"
+		scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="GetBanBenInfoActionP" class="com.hck.yanghua.phoneaction.BanBenAction"
+		scope="prototype">
+		<property name="banBenServer">
+			<ref bean="banbenDao" />
+		</property>
+	</bean>
 
 </beans>
