@@ -16,6 +16,9 @@
         <property name="password" type="java.lang.String">
             <column name="password" length="50" />
         </property>
+         <property name="userId" type="java.lang.String">
+            <column name="userid" length="255" />
+        </property>
         <property name="touxiang" type="java.lang.String">
             <column name="touxiang" />
         </property>
@@ -58,7 +61,7 @@
         <property name="logintime" type="java.sql.Timestamp">
             <column name="logintime" length="19" />
         </property>
-        <set name="pingluns" inverse="true">
+        <set name="pingluns" inverse="false" cascade="all" lazy="false">
             <key>
                 <column name="uid" />
             </key>

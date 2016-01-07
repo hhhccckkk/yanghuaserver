@@ -6,7 +6,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
 		<property name="url"
-			value="jdbc:mysql://127.0.0.1/yanghua?characterEncoding=utf8">
+			value="jdbc:mysql://localhost/yanghua?characterEncoding=utf8">
 		</property>
 		<property name="username" value="root"></property>
 		<property name="password" value="7878168"></property>
@@ -56,7 +56,7 @@
 			<ref bean="adminDao" />
 		</property>
 	</bean>
-	
+
 	<!-- 手机用 -->
 	<!-- 获取版本信息 -->
 	<bean id="banbenDao" class="com.hck.yanghua.server.BanBenServer"
@@ -69,6 +69,20 @@
 		scope="prototype">
 		<property name="banBenServer">
 			<ref bean="banbenDao" />
+		</property>
+	</bean>
+
+	<!-- 用户 -->
+	<bean id="userDao" class="com.hck.yanghua.server.UserServer"
+		scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="loginUserAction" class="com.hck.yanghua.phoneaction.UserAction"
+		scope="prototype">
+		<property name="userDao">
+			<ref bean="userDao" />
 		</property>
 	</bean>
 

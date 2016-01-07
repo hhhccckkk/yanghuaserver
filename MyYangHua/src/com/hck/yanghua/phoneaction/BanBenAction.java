@@ -27,7 +27,7 @@ public class BanBenAction extends BaseAction {
 	}
 
 	public void getBanBenInfo() {
-		System.out.print("ddddddddddddd: "+id);
+		
 		init();
 		Banben banben = banBenServer.getBanben(id);
 		if (banben != null) {

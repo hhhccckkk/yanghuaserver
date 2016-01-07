@@ -3,6 +3,7 @@ package com.hck.yanghua.phoneaction;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -66,7 +67,17 @@ public class BaseAction {
 	}
 
 	public int getIntData(String key) {
+		if (getStringData(key)==null) {
+			return 0;
+		}
 		int data = Integer.parseInt(getStringData(key));
+		return data;
+	}
+	public double getDoubleData(String key) {
+		if (getStringData(key)==null) {
+			return 0.0;
+		}
+		double data = Double.valueOf(getStringData(key));
 		return data;
 	}
 
