@@ -22,6 +22,12 @@
         <property name="touxiang" type="java.lang.String">
             <column name="touxiang" />
         </property>
+         <property name="imei" type="java.lang.String">
+            <column name="imei" />
+        </property>
+          <property name="city" type="java.lang.String">
+            <column name="city" />
+        </property>
         <property name="type" type="java.lang.Integer">
             <column name="type" />
         </property>

@@ -22,7 +22,14 @@ public class UserData implements Serializable{
 	private String time;
 	private String logintime;
 	private String userId;
+	private String imei;
 	
+	public String getImei() {
+		return imei;
+	}
+	public void setImei(String imei) {
+		this.imei = imei;
+	}
 	public String getLogintime() {
 		return logintime;
 	}

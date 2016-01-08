@@ -30,12 +30,30 @@ public class User implements java.io.Serializable {
 	private String time;
 	private Timestamp logintime;
 	private String userId;
+	private String imei;
+	private String city;
 	private Set pingluns = new HashSet(0);
 
 	// Constructors
 
 	/** default constructor */
 	public User() {
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getImei() {
+		return imei;
+	}
+
+	public void setImei(String imei) {
+		this.imei = imei;
 	}
 
 	public String getUserId() {

@@ -30,8 +30,9 @@ public class UserAction extends BaseAction {
 		String userName = getStringData("userName");
 		double jingdu = getDoubleData("jingdu");
 		double weidu = getDoubleData("weidu");
-		System.out.print("jingdu: "+jingdu);
 		String address = getStringData("address");
+		String imei=getStringData("imei");
+		String city=getStringData("city");
 		User user2 = userDao.isExit(userId);
 		if (user2 == null) {
 			user = new User();
@@ -46,6 +47,8 @@ public class UserAction extends BaseAction {
 			user.setWeidu(weidu);
 			user.setName(userName);
 			user.setTouxiang(touxiang);
+			user.setCity(city);
+			user.setImei(imei);
 			user.setPassword("123456");
 			user.setType(Contans.USER_TYPE_NORM);
 			user.setLogintime(new Timestamp(System.currentTimeMillis()));
@@ -69,7 +72,6 @@ public class UserAction extends BaseAction {
 				user2.setJingdu(jingdu);
 				user2.setWeidu(weidu);
 				userDao.updateUser(user2);
-				System.out.print("updateUser");
 			}
 			json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
 			json.put("data", changeUserData(user2));
@@ -95,6 +97,7 @@ public class UserAction extends BaseAction {
 			userData.setType(user.getType());
 			userData.setUid(user.getUid());
 			userData.setUserId(user.getUserId());
+			userData.setImei(user.getImei());
 		}
 		return userData;
 	}
