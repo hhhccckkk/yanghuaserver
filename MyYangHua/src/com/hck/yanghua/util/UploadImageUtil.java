@@ -14,23 +14,53 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.hck.data.contans.Contans;
+import com.hck.yanghua.bean.Tiezi;
+import com.mchange.v2.log.LogUtils;
 
 public class UploadImageUtil {
-	private List<String> imagePaths=new ArrayList<String>();
-	public List<String> uploadImage(HttpServletRequest request,
-			HttpServletResponse response) {
+	private static final int MAX_IMAGE_SIZE = 31457280;
+	private static final int XIAOTU_SIZE = 2; // 缩略图只需要2张
+	private static UpLoadImageCallBack uCallBack;
+
+	public interface UpLoadImageCallBack {
+		void onSuccess(Tiezi tiezi, List<String> datueList,
+				List<String> xiaotuList);
+
+		void onError(int type);
+	}
+
+	private static List<String> imagePaths;
+	private static List<String> xiaotuImagePaths;
+
+	public static void uploadImage(HttpServletRequest request,
+			HttpServletResponse response, UpLoadImageCallBack callBack,
+			Tiezi tiezi) {
+		imagePaths = new ArrayList<String>();
+		xiaotuImagePaths = new ArrayList<String>();
+		uCallBack = callBack;
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setRepository(new File(Contans.image_Path));
 		factory.setSizeThreshold(1024 * 1024 * 100);
 		ServletFileUpload upload = new ServletFileUpload(factory);
-		String fileName=null;
+		String fileName = null;
 		try {
 			List<FileItem> list = (List<FileItem>) upload.parseRequest(request);
 			for (FileItem item : list) {
+				if (item.getSize() > MAX_IMAGE_SIZE) {
+					System.out.println("getSize: "+item.getSize() );
+					uCallBack.onError(Contans.ADD_IMAGE_ERROR_OUT_MAX_SIZE);
+					return;
+				}
+			}
+			for (FileItem item : list) {
+				if (item.getName() == null) {
+					continue;
+				}
 				String name = System.currentTimeMillis() + item.getName();
-				fileName= name.substring(name.lastIndexOf("\\") + 1);
+				fileName = name.substring(name.lastIndexOf("\\") + 1);
 				InputStream is = item.getInputStream();
-				File f = new File(Contans.image_Path + fileName);
+				String filePath = Contans.image_Path + fileName;
+				File f = new File(filePath);
 				FileOutputStream fos = new FileOutputStream(f);
 				int hasRead = 0;
 				byte[] buf = new byte[1024];
@@ -41,13 +71,18 @@ public class UploadImageUtil {
 				fos.close();
 				is.close();
 				imagePaths.add(fileName);
+				if (xiaotuImagePaths.size() < XIAOTU_SIZE) {
+					ImageUtil.getImageXiaoTuPath(filePath);
+					xiaotuImagePaths.add(fileName);
+				}
+				ImageUtil.pressText(filePath);
 			}
-			
-			return imagePaths;
+			uCallBack.onSuccess(tiezi, imagePaths, xiaotuImagePaths);
 
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			return imagePaths;
+			System.out.print("上传图片: "+e1.toString());
+			uCallBack.onError(Contans.ADD_IMAGE_ERROR_UNKNOW);
 		}
 
 	}

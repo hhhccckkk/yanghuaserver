@@ -2,6 +2,7 @@ package com.hck.yanghua.phoneaction;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +40,7 @@ public class BaseAction {
 		request = ServletActionContext.getRequest();
 		response.setContentType("text/json;charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
+		
 
 	}
 

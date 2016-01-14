@@ -9,7 +9,7 @@
 		name="myRequestParser" class="com.hck.yanghua.util.RequestParseWrapper"
 		scope="default" optional="true" />
 	<constant name="struts.multipart.handler" value="myRequestParser" />
-
+   <constant name="struts.multipart.maxSize" value="41943040"/>
 	<package name="strutsphone" extends="json-default">
 		<!-- 获取版本信息 -->
 		<action name="getBanBenInfoP" class="GetBanBenInfoActionP"
@@ -22,8 +22,27 @@
 		</action>
 
 		<!-- 用户 -->
-		<action name="loginUser" class="loginUserAction"
+		<action name="loginUser" class="UserAction"
 			method="loginUser">
+			<result type="json">null</result>
+		</action>
+		<action name="addUserPushId" class="UserAction"
+			method="addUserPushId">
+			<result type="json">null</result>
+		</action>
+			<action name="getUser" class="UserAction"
+			method="getUser">
+			<result type="json">null</result>
+		</action>
+		
+		<!-- 贴子 -->
+		<action name="addTieZi" class="TieZiAction"
+			method="addTieZi">
+			<result type="json">null</result>
+		</action>
+		<!-- 获取帖子信息 -->
+			<action name="getTieZi" class="TieZiAction"
+			method="getTieZi">
 			<result type="json">null</result>
 		</action>
 	</package>

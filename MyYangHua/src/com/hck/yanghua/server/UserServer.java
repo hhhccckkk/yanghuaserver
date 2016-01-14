@@ -47,4 +47,8 @@ public class UserServer extends HibernateDaoSupport implements UserDao {
 
 	}
 
+	public User getUser(Long userId) {
+		return (User) getHibernateTemplate().get(User.class, userId);
+	}
+
 }

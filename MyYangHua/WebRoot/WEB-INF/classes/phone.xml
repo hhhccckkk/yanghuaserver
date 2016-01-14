@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="false"></constant>
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"
+		name="myRequestParser" class="com.hck.yanghua.util.RequestParseWrapper"
+		scope="default" optional="true" />
+	<constant name="struts.multipart.handler" value="myRequestParser" />
+   <constant name="struts.multipart.maxSize" value="41943040"/>
+	<package name="strutsphone" extends="json-default">
+		<!-- 获取版本信息 -->
+		<action name="getBanBenInfoP" class="GetBanBenInfoActionP"
+			method="getBanBenInfo">
+			<result type="json">null</result>
+		</action>
+		<action name="addImageP" class="com.hck.yanghua.phoneaction.ImageTest"
+			method="addImage">
+			<result type="json">null</result>
+		</action>
+
+		<!-- 用户 -->
+		<action name="loginUser" class="UserAction"
+			method="loginUser">
+			<result type="json">null</result>
+		</action>
+		<action name="addUserPushId" class="UserAction"
+			method="addUserPushId">
+			<result type="json">null</result>
+		</action>
+			<action name="getUser" class="UserAction"
+			method="getUser">
+			<result type="json">null</result>
+		</action>
+		
+		<!-- 贴子 -->
+		<action name="addTieZi" class="TieZiAction"
+			method="addTieZi">
+			<result type="json">null</result>
+		</action>
+		<!-- 获取帖子信息 -->
+			<action name="getTieZi" class="TieZiAction"
+			method="getTieZi">
+			<result type="json">null</result>
+		</action>
+	</package>
+</struts>

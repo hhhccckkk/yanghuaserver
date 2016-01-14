@@ -9,8 +9,8 @@ public class Huitie implements java.io.Serializable {
 	// Fields
 
 	private Long hid;
-	private Long uid;
-	private Long pid;
+	private Tiezi tiezi;
+	private User user;
 	private String content;
 	private String time;
 
@@ -21,9 +21,9 @@ public class Huitie implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Huitie(Long uid, Long pid, String content, String time) {
-		this.uid = uid;
-		this.pid = pid;
+	public Huitie(Tiezi tiezi, User user, String content, String time) {
+		this.tiezi = tiezi;
+		this.user = user;
 		this.content = content;
 		this.time = time;
 	}
@@ -38,20 +38,20 @@ public class Huitie implements java.io.Serializable {
 		this.hid = hid;
 	}
 
-	public Long getUid() {
-		return this.uid;
+	public Tiezi getTiezi() {
+		return this.tiezi;
 	}
 
-	public void setUid(Long uid) {
-		this.uid = uid;
+	public void setTiezi(Tiezi tiezi) {
+		this.tiezi = tiezi;
 	}
 
-	public Long getPid() {
-		return this.pid;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setPid(Long pid) {
-		this.pid = pid;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getContent() {

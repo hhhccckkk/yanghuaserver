@@ -8,7 +8,7 @@ import com.hck.yanghua.dao.UserDao;
 import com.hck.yanghua.vo.UserData;
 
 public class UserAction extends BaseAction {
-	private static final String MALE = "m";
+	private static final int MALE = 1;
 	private static final int MAN = 1;
 	private static final int WOMAN = 2;
 	private UserDao userDao;
@@ -25,14 +25,14 @@ public class UserAction extends BaseAction {
 		User user = null;
 		init();
 		String userId = getStringData("userId");
-		String xingbie = getStringData("xingbie");
+		int xingbie = getIntData("xingbie");
 		String touxiang = getStringData("touxiang");
 		String userName = getStringData("userName");
 		double jingdu = getDoubleData("jingdu");
 		double weidu = getDoubleData("weidu");
 		String address = getStringData("address");
-		String imei=getStringData("imei");
-		String city=getStringData("city");
+		String imei = getStringData("imei");
+		String city = getStringData("city");
 		User user2 = userDao.isExit(userId);
 		if (user2 == null) {
 			user = new User();
@@ -53,8 +53,8 @@ public class UserAction extends BaseAction {
 			user.setType(Contans.USER_TYPE_NORM);
 			user.setLogintime(new Timestamp(System.currentTimeMillis()));
 			user.setTime(new Timestamp(System.currentTimeMillis()).toString());
-			user.setUserId(userId);
-			if (MALE.equals(xingbie)) {
+			user.setUserid(userId);
+			if (MALE==xingbie) {
 				user.setXingbie(MAN);
 			} else {
 				user.setXingbie(WOMAN);
@@ -96,10 +96,48 @@ public class UserAction extends BaseAction {
 			userData.setTouxiang(user.getTouxiang());
 			userData.setType(user.getType());
 			userData.setUid(user.getUid());
-			userData.setUserId(user.getUserId());
+			userData.setUserId(user.getUserid());
 			userData.setImei(user.getImei());
+			userData.setName(user.getName());
 		}
 		return userData;
+	}
+
+	public void addUserPushId() {
+		init();
+		String pushid = getStringData("pushid");
+		long uid = getLongData("uid");
+		if (pushid == null || uid <= 0) {
+			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
+		} else {
+			User user = userDao.getUser(uid);
+			if (user != null) {
+				user.setPushid(pushid);
+				boolean b = userDao.updateUser(user);
+				if (b) {
+					json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
+				} else {
+					json.put(Contans.CODE, Contans.GET_DATA_ERROR);
+				}
+			} else {
+				json.put(Contans.CODE, Contans.GET_DATA_ERROR);
+			}
+		}
+		write();
+	}
+	
+	public void getUser(){
+		init();
+		long uid=getLongData("uid");
+		User user=userDao.getUser(uid);
+		if (user==null) {
+			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
+		}
+		else {
+			json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
+			json.put("data", changeUserData(user));
+		}
+		write();
 	}
 
 }

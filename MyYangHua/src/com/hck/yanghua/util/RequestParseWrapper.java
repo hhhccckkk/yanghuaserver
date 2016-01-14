@@ -9,6 +9,6 @@ import org.apache.struts2.dispatcher.multipart.JakartaMultiPartRequest;
 public class RequestParseWrapper extends JakartaMultiPartRequest{
 	public void parse(HttpServletRequest servletRequest, String saveDir)throws IOException 
     {
-		
    }  
+	
 }

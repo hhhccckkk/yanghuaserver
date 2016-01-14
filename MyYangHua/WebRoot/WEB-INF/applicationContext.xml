@@ -79,11 +79,27 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="loginUserAction" class="com.hck.yanghua.phoneaction.UserAction"
+	<bean id="UserAction" class="com.hck.yanghua.phoneaction.UserAction"
 		scope="prototype">
 		<property name="userDao">
 			<ref bean="userDao" />
 		</property>
 	</bean>
+
+
+	<!-- 帖子 -->
+	<bean id="tieziDao" class="com.hck.yanghua.server.AddTieZiServer"
+		scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TieZiAction" class="com.hck.yanghua.phoneaction.TieZiAction"
+		scope="prototype">
+		<property name="tieZiDao">
+			<ref bean="tieziDao" />
+		</property>
+	</bean>
+
 
 </beans>

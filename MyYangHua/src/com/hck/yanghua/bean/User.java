@@ -29,9 +29,12 @@ public class User implements java.io.Serializable {
 	private String aihao;
 	private String time;
 	private Timestamp logintime;
-	private String userId;
+	private String userid;
 	private String imei;
 	private String city;
+	private String pushid;
+	private Set tiezis = new HashSet(0);
+	private Set huities = new HashSet(0);
 	private Set pingluns = new HashSet(0);
 
 	// Constructors
@@ -40,36 +43,13 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getImei() {
-		return imei;
-	}
-
-	public void setImei(String imei) {
-		this.imei = imei;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
 	/** full constructor */
 	public User(String name, String password, String touxiang, Integer type,
 			Integer xingbie, Long jifeng, Integer jinbi, Integer fensi,
 			Integer guanzhu, Integer dongtai, Double jingdu, Double weidu,
 			String address, String aihao, String time, Timestamp logintime,
-			Set pingluns) {
+			String userid, String imei, String city, String pushid, Set tiezis,
+			Set huities, Set pingluns) {
 		this.name = name;
 		this.password = password;
 		this.touxiang = touxiang;
@@ -86,6 +66,12 @@ public class User implements java.io.Serializable {
 		this.aihao = aihao;
 		this.time = time;
 		this.logintime = logintime;
+		this.userid = userid;
+		this.imei = imei;
+		this.city = city;
+		this.pushid = pushid;
+		this.tiezis = tiezis;
+		this.huities = huities;
 		this.pingluns = pingluns;
 	}
 
@@ -225,6 +211,54 @@ public class User implements java.io.Serializable {
 
 	public void setLogintime(Timestamp logintime) {
 		this.logintime = logintime;
+	}
+
+	public String getUserid() {
+		return this.userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getImei() {
+		return this.imei;
+	}
+
+	public void setImei(String imei) {
+		this.imei = imei;
+	}
+
+	public String getCity() {
+		return this.city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPushid() {
+		return this.pushid;
+	}
+
+	public void setPushid(String pushid) {
+		this.pushid = pushid;
+	}
+
+	public Set getTiezis() {
+		return this.tiezis;
+	}
+
+	public void setTiezis(Set tiezis) {
+		this.tiezis = tiezis;
+	}
+
+	public Set getHuities() {
+		return this.huities;
+	}
+
+	public void setHuities(Set huities) {
+		this.huities = huities;
 	}
 
 	public Set getPingluns() {

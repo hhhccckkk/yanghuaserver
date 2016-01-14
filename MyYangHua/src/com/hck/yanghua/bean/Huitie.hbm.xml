@@ -10,12 +10,12 @@
             <column name="hid" />
             <generator class="identity" />
         </id>
-        <property name="uid" type="java.lang.Long">
+        <many-to-one name="tiezi" class="com.hck.yanghua.bean.Tiezi" fetch="select">
+            <column name="tid" />
+        </many-to-one>
+        <many-to-one name="user" class="com.hck.yanghua.bean.User" fetch="select">
             <column name="uid" />
-        </property>
-        <property name="pid" type="java.lang.Long">
-            <column name="pid" />
-        </property>
+        </many-to-one>
         <property name="content" type="java.lang.String">
             <column name="content" />
         </property>

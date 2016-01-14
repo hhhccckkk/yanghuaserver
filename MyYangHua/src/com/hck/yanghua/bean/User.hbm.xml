@@ -16,17 +16,8 @@
         <property name="password" type="java.lang.String">
             <column name="password" length="50" />
         </property>
-         <property name="userId" type="java.lang.String">
-            <column name="userid" length="255" />
-        </property>
         <property name="touxiang" type="java.lang.String">
             <column name="touxiang" />
-        </property>
-         <property name="imei" type="java.lang.String">
-            <column name="imei" />
-        </property>
-          <property name="city" type="java.lang.String">
-            <column name="city" />
         </property>
         <property name="type" type="java.lang.Integer">
             <column name="type" />
@@ -50,10 +41,10 @@
             <column name="dongtai" />
         </property>
         <property name="jingdu" type="java.lang.Double">
-            <column name="jingdu" precision="255" scale="0" />
+            <column name="jingdu" precision="255" scale="7" />
         </property>
         <property name="weidu" type="java.lang.Double">
-            <column name="weidu" precision="255" scale="0" />
+            <column name="weidu" precision="255" scale="7" />
         </property>
         <property name="address" type="java.lang.String">
             <column name="address" length="100" />
@@ -67,7 +58,31 @@
         <property name="logintime" type="java.sql.Timestamp">
             <column name="logintime" length="19" />
         </property>
-        <set name="pingluns" inverse="false" cascade="all" lazy="false">
+        <property name="userid" type="java.lang.String">
+            <column name="userid" />
+        </property>
+        <property name="imei" type="java.lang.String">
+            <column name="imei" />
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="city" />
+        </property>
+        <property name="pushid" type="java.lang.String">
+            <column name="pushid" />
+        </property>
+        <set name="tiezis" inverse="true">
+            <key>
+                <column name="uid" />
+            </key>
+            <one-to-many class="com.hck.yanghua.bean.Tiezi" />
+        </set>
+        <set name="huities" inverse="true">
+            <key>
+                <column name="uid" />
+            </key>
+            <one-to-many class="com.hck.yanghua.bean.Huitie" />
+        </set>
+        <set name="pingluns" inverse="true">
             <key>
                 <column name="uid" />
             </key>
