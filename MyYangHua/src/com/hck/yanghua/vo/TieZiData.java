@@ -20,6 +20,14 @@ public class TieZiData extends UserData{
 	private Integer istuijian;
 	private String tupian6;
 	private String tupian7;
+	private String huiFuTime;
+	
+	public String getHuiFuTime() {
+		return huiFuTime;
+	}
+	public void setHuiFuTime(String huiFuTime) {
+		this.huiFuTime = huiFuTime;
+	}
 	public Long getTid() {
 		return tid;
 	}

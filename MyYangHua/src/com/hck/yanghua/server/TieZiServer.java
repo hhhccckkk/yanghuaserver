@@ -10,7 +10,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.hck.yanghua.bean.Tiezi;
 import com.hck.yanghua.dao.TieZiDao;
 
-public class AddTieZiServer extends HibernateDaoSupport implements TieZiDao {
+public class TieZiServer extends HibernateDaoSupport implements TieZiDao {
 
 	public long addTieZi(Tiezi tiezi) {
 		try {
@@ -25,7 +25,7 @@ public class AddTieZiServer extends HibernateDaoSupport implements TieZiDao {
 		if (maxSize <= 0) {
 			maxSize = 10;
 		}
-		String sql = "from Tiezi tiezi order by tiezi.tid desc";
+		String sql = "from Tiezi tiezi order by tiezi.huifutime desc";
 		return getList(sql, page, maxSize);
 	}
 

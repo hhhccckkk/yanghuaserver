@@ -22,7 +22,7 @@ public class ImageUtil {
 	private static final String XIAOTU_PATH = "tiezi_images_xiaotu"; // 小图存放路径
 	private static final int FONT_SIZE = 18; // 文字大小
 	private static final String APP_NAME = "来自app养花社区"; // 需要加的文字
-	private static int NEW_IMAGE_SIZE = 110; // 压缩后的图片大小
+	private static int NEW_IMAGE_SIZE = 240; // 压缩后的图片大小
 
 	/**
 	 * 

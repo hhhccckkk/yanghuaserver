@@ -19,6 +19,8 @@ public class Tiezi implements java.io.Serializable {
 	private String tupian3;
 	private String tupian4;
 	private String tupian5;
+	private String tupian6;
+	private String tupian7;
 	private String time;
 	private Integer type;
 	private Integer pinglunsize;
@@ -26,8 +28,7 @@ public class Tiezi implements java.io.Serializable {
 	private Integer isjinghua;
 	private Integer iszhiding;
 	private Integer istuijian;
-	private String tupian6;
-	private String tupian7;
+	private String huiFuTime;
 	private Set huities = new HashSet(0);
 	private Set pingluns = new HashSet(0);
 
@@ -64,6 +65,14 @@ public class Tiezi implements java.io.Serializable {
 	}
 
 	// Property accessors
+
+	public String getHuiFuTime() {
+		return huiFuTime;
+	}
+
+	public void setHuiFuTime(String huiFuTime) {
+		this.huiFuTime = huiFuTime;
+	}
 
 	public Long getTid() {
 		return this.tid;

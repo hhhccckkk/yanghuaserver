@@ -61,7 +61,9 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 			tiezi.setIszhiding(0);
 			tiezi.setPinglunsize(0);
 			tiezi.setType(0);
-			tiezi.setTime(new Timestamp(System.currentTimeMillis()).toString());
+			String addTieZiTime=new Timestamp(System.currentTimeMillis()).toString();
+			tiezi.setTime(addTieZiTime);
+			tiezi.setHuiFuTime(addTieZiTime);
 			id = tieZiDao.addTieZi(tiezi);
 			if (id < 0) {
 				json.put(Contans.CODE, Contans.GET_DATA_ERROR);
@@ -168,8 +170,9 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 			tieZiData.setName(user.getName());
 			tieZiData.setJifeng(user.getJifeng());
 			tieZiData.setFensi(user.getFensi());
+			tieZiData.setHuiFuTime(tiezi.getHuiFuTime());
 			tieZiDatas.add(tieZiData);
-		
+
 		}
 		return tieZiDatas;
 	}

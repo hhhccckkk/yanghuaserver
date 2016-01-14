@@ -57,6 +57,7 @@ public class UploadImageUtil {
 					continue;
 				}
 				String name = System.currentTimeMillis() + item.getName();
+				name=name.replaceAll("%", "").trim();
 				fileName = name.substring(name.lastIndexOf("\\") + 1);
 				InputStream is = item.getInputStream();
 				String filePath = Contans.image_Path + fileName;
@@ -71,10 +72,6 @@ public class UploadImageUtil {
 				fos.close();
 				is.close();
 				imagePaths.add(fileName);
-				if (xiaotuImagePaths.size() < XIAOTU_SIZE) {
-					ImageUtil.getImageXiaoTuPath(filePath);
-					xiaotuImagePaths.add(fileName);
-				}
 				ImageUtil.pressText(filePath);
 			}
 			uCallBack.onSuccess(tiezi, imagePaths, xiaotuImagePaths);

@@ -58,6 +58,9 @@
         <property name="tupian7" type="java.lang.String">
             <column name="tupian7" />
         </property>
+         <property name="huiFuTime" type="java.lang.String">
+            <column name="huifutime" />
+        </property>
         <set name="huities" inverse="false" cascade="all" lazy="false">
             <key>
                 <column name="tid" />

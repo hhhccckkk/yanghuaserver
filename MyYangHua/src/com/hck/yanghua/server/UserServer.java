@@ -27,7 +27,7 @@ public class UserServer extends HibernateDaoSupport implements UserDao {
 
 	@SuppressWarnings("unchecked")
 	public User getUser(String userID) {
-		String sqlString = "from User u where u.userId='" + userID + "'";
+		String sqlString = "from User u where u.userid='" + userID + "'";
 		List<User> users = new ArrayList<User>();
 		users = getHibernateTemplate().find(sqlString);
 		if (users.isEmpty()) {
@@ -36,7 +36,7 @@ public class UserServer extends HibernateDaoSupport implements UserDao {
 			return users.get(0);
 		}
 	}
-
+   
 	public boolean updateUser(User user) {
 		try {
 			getHibernateTemplate().update(user);
