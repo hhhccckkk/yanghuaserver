@@ -42,7 +42,7 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 		tiezi.setUser(user);
 		tiezi.setContent(content);
 		tiezi.setAddress(address);
-		tiezi.setType(type);
+		tiezi.setType(type);  //type 1一般分享帖子,2出售帖子
 		tiezi.setUser(user);
 		int hasImage = getIntData("hasImage");
 		if (hasImage == HAS_IMAGE) { // 有图片，先上传图片
@@ -64,14 +64,12 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 			tiezi.setIstuijian(0);
 			tiezi.setIszhiding(0);
 			tiezi.setPinglunsize(0);
-			tiezi.setType(0);
 			String addTieZiTime = new Timestamp(System.currentTimeMillis())
 					.toString();
 			tiezi.setTime(addTieZiTime);
 			tiezi.setHuiFuTime(addTieZiTime);
 			id = tieZiDao.addTieZi(tiezi);
 			if (id < 0) {
-				System.out.print("eeee111111: ");
 				json.put(Contans.CODE, Contans.GET_DATA_ERROR);
 			} else {
 				json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
@@ -118,12 +116,13 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 		write();
 	}
 
-	// 获取帖子信息
+	// 获取帖子信息,一般帖子,从最新的取
 	public void getTieZi() {
 		init();
 		int maxSize = getIntData("maxSize");
 		int page = getIntData("page");
-		List<Tiezi> tiezis = tieZiDao.getTiezis(page, maxSize);
+		int type=getIntData("type");
+		List<Tiezi> tiezis = tieZiDao.getTiezis(type,page, maxSize);
 		if (tiezis == null) {
 			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
 		} else {
@@ -132,7 +131,21 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 		}
 		write();
 	}
-
+    //帖子按照从评论由多到少排序
+	public void getHotTieZi(){
+		init();
+		int maxSize = getIntData("maxSize");
+		int page = getIntData("page");
+		List<Tiezi> tiezis = tieZiDao.getHotTiezis(page, maxSize);
+		if (tiezis == null) {
+			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
+		} else {
+			json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
+			json.put("data", changeData(tiezis));
+		}
+		write();
+	}
+	
 	private List<TieZiData> changeData(List<Tiezi> tiezis) {
 		List<TieZiData> tieZiDatas = new ArrayList<TieZiData>();
 		TieZiData tieZiData = null;

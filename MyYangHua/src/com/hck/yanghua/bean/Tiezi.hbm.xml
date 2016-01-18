@@ -35,7 +35,7 @@
             <column name="time" length="200" />
         </property>
         <property name="type" type="java.lang.Integer">
-            <column name="type" />
+            <column name="tiezitype" />
         </property>
         <property name="pinglunsize" type="java.lang.Integer">
             <column name="pinglunsize" />
@@ -69,12 +69,6 @@
                 <column name="tid" />
             </key>
             <one-to-many class="com.hck.yanghua.bean.Huitie" />
-        </set>
-        <set name="pingluns" inverse="false" cascade="all" lazy="false">
-            <key>
-                <column name="tid" />
-            </key>
-            <one-to-many class="com.hck.yanghua.bean.Pinglun" />
         </set>
     </class>
 </hibernate-mapping>

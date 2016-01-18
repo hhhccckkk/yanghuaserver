@@ -40,6 +40,10 @@
 		<action name="getTieZi" class="TieZiAction" method="getTieZi">
 			<result type="json">null</result>
 		</action>
+			<!-- 获取帖子信息  从热门排序-->
+		<action name="getHotTieZi" class="TieZiAction" method="getHotTieZi">
+			<result type="json">null</result>
+		</action>
 
 		<!-- 增加回帖信息 -->
 		<action name="addHuiTie" class="HuiTieAction" method="addHuiTie">

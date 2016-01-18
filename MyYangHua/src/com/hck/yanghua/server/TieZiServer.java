@@ -21,11 +21,11 @@ public class TieZiServer extends HibernateDaoSupport implements TieZiDao {
 		}
 	}
 
-	public List<Tiezi> getTiezis(int page, int maxSize) {
+	public List<Tiezi> getTiezis(int type,int page, int maxSize) {
 		if (maxSize <= 0) {
 			maxSize = 10;
 		}
-		String sql = "from Tiezi tiezi order by tiezi.huiFuTime desc";
+		String sql = "from Tiezi tiezi where tiezi.type="+type+" order by tiezi.huiFuTime desc";
 		return getList(sql, page, maxSize);
 	}
 
@@ -60,6 +60,14 @@ public class TieZiServer extends HibernateDaoSupport implements TieZiDao {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public List<Tiezi> getHotTiezis(int page, int maxSize) {
+		if (maxSize <= 0) {
+			maxSize = 10;
+		}
+		String sql = "from Tiezi tiezi where tiezi.type=1 order by tiezi.pinglunsize desc";
+		return getList(sql, page, maxSize);
 	}
 
 }

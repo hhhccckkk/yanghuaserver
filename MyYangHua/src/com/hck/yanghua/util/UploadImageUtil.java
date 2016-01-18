@@ -18,7 +18,7 @@ import com.hck.yanghua.bean.Tiezi;
 import com.mchange.v2.log.LogUtils;
 
 public class UploadImageUtil {
-	private static final int MAX_IMAGE_SIZE = 31457280;
+	private static final int MAX_IMAGE_SIZE = 6145728;
 	private static final int XIAOTU_SIZE = 2; // 缩略图只需要2张
 	private static UpLoadImageCallBack uCallBack;
 
@@ -29,16 +29,14 @@ public class UploadImageUtil {
 	}
 
 	private static List<String> imagePaths;
-	private static List<String> xiaotuImagePaths;
 
 	public static void uploadImage(HttpServletRequest request,
 			HttpServletResponse response, UpLoadImageCallBack callBack,
 			Object tiezi) {
 		imagePaths = new ArrayList<String>();
-		xiaotuImagePaths = new ArrayList<String>();
 		uCallBack = callBack;
 		DiskFileItemFactory factory = new DiskFileItemFactory();
-		factory.setRepository(new File(Contans.image_Path));
+		factory.setRepository(new File(Contans.image_path));
 		factory.setSizeThreshold(1024 * 1024 * 100);
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		String fileName = null;
@@ -46,7 +44,6 @@ public class UploadImageUtil {
 			List<FileItem> list = (List<FileItem>) upload.parseRequest(request);
 			for (FileItem item : list) {
 				if (item.getSize() > MAX_IMAGE_SIZE) {
-					System.out.println("getSize: "+item.getSize() );
 					uCallBack.onError(Contans.ADD_IMAGE_ERROR_OUT_MAX_SIZE);
 					return;
 				}
@@ -59,7 +56,7 @@ public class UploadImageUtil {
 				name=name.replaceAll("%", "").trim();
 				fileName = name.substring(name.lastIndexOf("\\") + 1);
 				InputStream is = item.getInputStream();
-				String filePath = Contans.image_Path + fileName;
+				String filePath = Contans.image_path + fileName;
 				File f = new File(filePath);
 				FileOutputStream fos = new FileOutputStream(f);
 				int hasRead = 0;
@@ -82,5 +79,4 @@ public class UploadImageUtil {
 		}
 
 	}
-
 }
