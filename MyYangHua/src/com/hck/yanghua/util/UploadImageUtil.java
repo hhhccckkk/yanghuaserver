@@ -23,8 +23,7 @@ public class UploadImageUtil {
 	private static UpLoadImageCallBack uCallBack;
 
 	public interface UpLoadImageCallBack {
-		void onSuccess(Tiezi tiezi, List<String> datueList,
-				List<String> xiaotuList);
+		void onSuccess(Object data, List<String> datueList);
 
 		void onError(int type);
 	}
@@ -34,7 +33,7 @@ public class UploadImageUtil {
 
 	public static void uploadImage(HttpServletRequest request,
 			HttpServletResponse response, UpLoadImageCallBack callBack,
-			Tiezi tiezi) {
+			Object tiezi) {
 		imagePaths = new ArrayList<String>();
 		xiaotuImagePaths = new ArrayList<String>();
 		uCallBack = callBack;
@@ -74,7 +73,7 @@ public class UploadImageUtil {
 				imagePaths.add(fileName);
 				ImageUtil.pressText(filePath);
 			}
-			uCallBack.onSuccess(tiezi, imagePaths, xiaotuImagePaths);
+			uCallBack.onSuccess(tiezi, imagePaths);
 
 		} catch (Exception e1) {
 			e1.printStackTrace();

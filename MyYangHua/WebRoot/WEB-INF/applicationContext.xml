@@ -41,6 +41,7 @@
 				<value>com/hck/yanghua/bean/Tiezi.hbm.xml</value>
 				<value>com/hck/yanghua/bean/User.hbm.xml</value>
 				<value>com/hck/yanghua/bean/Xinxi.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Zan.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -88,7 +89,7 @@
 
 
 	<!-- 帖子 -->
-	<bean id="tieziDao" class="com.hck.yanghua.server.AddTieZiServer"
+	<bean id="tieziDao" class="com.hck.yanghua.server.TieZiServer"
 		scope="prototype">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -96,6 +97,40 @@
 	</bean>
 	<bean id="TieZiAction" class="com.hck.yanghua.phoneaction.TieZiAction"
 		scope="prototype">
+		<property name="tieZiDao">
+			<ref bean="tieziDao" />
+		</property>
+	</bean>
+
+
+	<!-- 回帖 -->
+	<bean id="huitieDao" class="com.hck.yanghua.server.HuiTieServer"
+		scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="HuiTieAction" class="com.hck.yanghua.phoneaction.HuiTieAction"
+		scope="prototype">
+		<property name="hDao">
+			<ref bean="huitieDao" />
+		</property>
+		<property name="tieZiDao">
+			<ref bean="tieziDao" />
+		</property>
+	</bean>
+
+	<!-- 赞 -->
+	<bean id="zanDao" class="com.hck.yanghua.server.ZanServer" scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ZanAction" class="com.hck.yanghua.phoneaction.ZanAction"
+		scope="prototype">
+		<property name="zanDao">
+			<ref bean="zanDao" />
+		</property>
 		<property name="tieZiDao">
 			<ref bean="tieziDao" />
 		</property>

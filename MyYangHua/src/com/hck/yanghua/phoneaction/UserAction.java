@@ -24,7 +24,7 @@ public class UserAction extends BaseAction {
 	public void loginUser() {
 		User user = null;
 		init();
-		String userId = getStringData("userId");
+		String userId = getStringData("uid");
 		int xingbie = getIntData("xingbie");
 		String touxiang = getStringData("touxiang");
 		String userName = getStringData("userName");

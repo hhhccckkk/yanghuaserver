@@ -29,6 +29,16 @@ public class Tiezi implements java.io.Serializable {
 	private Integer iszhiding;
 	private Integer istuijian;
 	private String huiFuTime;
+	private String address;
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	private Set huities = new HashSet(0);
 	private Set pingluns = new HashSet(0);
 

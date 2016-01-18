@@ -32,6 +32,8 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 		init();
 		long uid = getLongData("uid");
 		String content = getStringData("content");
+		String address = getStringData("address");
+		int type = getIntData("type");
 		if (uid <= 0 || content == null || content.length() > MAX_CONTENT_SIZE) {
 			return;
 		}
@@ -39,6 +41,8 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 		user.setUid(uid);
 		tiezi.setUser(user);
 		tiezi.setContent(content);
+		tiezi.setAddress(address);
+		tiezi.setType(type);
 		tiezi.setUser(user);
 		int hasImage = getIntData("hasImage");
 		if (hasImage == HAS_IMAGE) { // 有图片，先上传图片
@@ -61,11 +65,13 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 			tiezi.setIszhiding(0);
 			tiezi.setPinglunsize(0);
 			tiezi.setType(0);
-			String addTieZiTime=new Timestamp(System.currentTimeMillis()).toString();
+			String addTieZiTime = new Timestamp(System.currentTimeMillis())
+					.toString();
 			tiezi.setTime(addTieZiTime);
 			tiezi.setHuiFuTime(addTieZiTime);
 			id = tieZiDao.addTieZi(tiezi);
 			if (id < 0) {
+				System.out.print("eeee111111: ");
 				json.put(Contans.CODE, Contans.GET_DATA_ERROR);
 			} else {
 				json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
@@ -78,43 +84,31 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 	/**
 	 * 增加图片成功，把返回的图片地址加入帖子里面，然后增加帖子信息 datuList 原图 xiaotuList 缩略图地址
 	 */
-	public void onSuccess(Tiezi tiezi, List<String> datuList,
-			List<String> xiaotuList) {
+	public void onSuccess(Object tiezi, List<String> datuList) {
+		Tiezi tiezi2 = (Tiezi) tiezi;
 		for (int i = 0; i < datuList.size(); i++) {
 			switch (i) {
 			case 0:
-				tiezi.setTupian1(datuList.get(0));
+				tiezi2.setTupian1(datuList.get(0));
 				break;
 			case 1:
-				tiezi.setTupian2(datuList.get(1));
+				tiezi2.setTupian2(datuList.get(1));
 				break;
 			case 2:
-				tiezi.setTupian3(datuList.get(2));
+				tiezi2.setTupian3(datuList.get(2));
 				break;
 			case 3:
-				tiezi.setTupian4(datuList.get(3));
+				tiezi2.setTupian4(datuList.get(3));
 				break;
 			case 4:
-				tiezi.setTupian5(datuList.get(4));
+				tiezi2.setTupian5(datuList.get(4));
 				break;
 
 			default:
 				break;
 			}
 		}
-		for (int i = 0; i < xiaotuList.size(); i++) {
-			switch (i) {
-			case 0:
-				tiezi.setTupian6(xiaotuList.get(0));
-				break;
-			case 1:
-				tiezi.setTupian7(xiaotuList.get(1));
-				break;
-			default:
-				break;
-			}
-		}
-		addTieZiToServer(tiezi);
+		addTieZiToServer(tiezi2);
 	}
 
 	public void onError(int type) {
@@ -130,7 +124,7 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 		int maxSize = getIntData("maxSize");
 		int page = getIntData("page");
 		List<Tiezi> tiezis = tieZiDao.getTiezis(page, maxSize);
-		if (tiezis == null || tiezis.isEmpty()) {
+		if (tiezis == null) {
 			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
 		} else {
 			json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
@@ -171,6 +165,19 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 			tieZiData.setJifeng(user.getJifeng());
 			tieZiData.setFensi(user.getFensi());
 			tieZiData.setHuiFuTime(tiezi.getHuiFuTime());
+			String address = tiezi.getAddress();
+			if (address == null || "".equals(address)) {
+				tieZiData.setAddress(user.getAddress());
+			} else {
+				tieZiData.setAddress(address);
+			}
+
+			int isNan = user.getXingbie();
+			if (isNan == 1) {// 1男
+				tieZiData.setNan(true);
+			} else {
+				tieZiData.setNan(false);
+			}
 			tieZiDatas.add(tieZiData);
 
 		}

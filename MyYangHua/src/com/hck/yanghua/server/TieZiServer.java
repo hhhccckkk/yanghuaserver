@@ -25,7 +25,7 @@ public class TieZiServer extends HibernateDaoSupport implements TieZiDao {
 		if (maxSize <= 0) {
 			maxSize = 10;
 		}
-		String sql = "from Tiezi tiezi order by tiezi.huifutime desc";
+		String sql = "from Tiezi tiezi order by tiezi.huiFuTime desc";
 		return getList(sql, page, maxSize);
 	}
 
@@ -47,6 +47,19 @@ public class TieZiServer extends HibernateDaoSupport implements TieZiDao {
 	private int getCount(String sql) {
 
 		return this.getHibernateTemplate().find(sql).size();
+	}
+
+	public Tiezi getTiezi(long tid) {
+		return (Tiezi) getHibernateTemplate().get(Tiezi.class, tid);
+	}
+
+	public boolean updateTiezi(Tiezi tiezi) {
+		try {
+			getHibernateTemplate().update(tiezi);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

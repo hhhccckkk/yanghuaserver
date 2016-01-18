@@ -61,6 +61,9 @@
          <property name="huiFuTime" type="java.lang.String">
             <column name="huifutime" />
         </property>
+            <property name="address" type="java.lang.String">
+            <column name="address" />
+        </property>
         <set name="huities" inverse="false" cascade="all" lazy="false">
             <key>
                 <column name="tid" />

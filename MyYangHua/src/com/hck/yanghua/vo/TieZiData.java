@@ -21,7 +21,15 @@ public class TieZiData extends UserData{
 	private String tupian6;
 	private String tupian7;
 	private String huiFuTime;
+	private boolean isNan;
 	
+
+	public boolean isNan() {
+		return isNan;
+	}
+	public void setNan(boolean isNan) {
+		this.isNan = isNan;
+	}
 	public String getHuiFuTime() {
 		return huiFuTime;
 	}

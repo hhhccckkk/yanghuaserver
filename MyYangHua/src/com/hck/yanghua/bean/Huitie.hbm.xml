@@ -10,17 +10,38 @@
             <column name="hid" />
             <generator class="identity" />
         </id>
-        <many-to-one name="tiezi" class="com.hck.yanghua.bean.Tiezi" fetch="select">
-            <column name="tid" />
-        </many-to-one>
-        <many-to-one name="user" class="com.hck.yanghua.bean.User" fetch="select">
+        <many-to-one name="user" class="com.hck.yanghua.bean.User" fetch="select" lazy="false">
             <column name="uid" />
         </many-to-one>
+        <property name="tid" type="java.lang.Long">
+            <column name="tid" />
+        </property>
         <property name="content" type="java.lang.String">
             <column name="content" />
         </property>
+         <property name="yuanTie" type="java.lang.String">
+            <column name="yuantie" />
+        </property>
+          <property name="huifuname" type="java.lang.String">
+            <column name="huifuname" />
+        </property>
         <property name="time" type="java.lang.String">
             <column name="time" length="200" />
+        </property>
+        <property name="image1" type="java.lang.String">
+            <column name="image1" />
+        </property>
+        <property name="iamge2" type="java.lang.String">
+            <column name="iamge2" />
+        </property>
+        <property name="iamge3" type="java.lang.String">
+            <column name="iamge3" />
+        </property>
+          <property name="address" type="java.lang.String">
+            <column name="address" />
+        </property>
+        <property name="type" type="java.lang.Integer">
+            <column name="type" />
         </property>
     </class>
 </hibernate-mapping>
