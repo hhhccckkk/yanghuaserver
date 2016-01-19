@@ -86,7 +86,13 @@
 			<ref bean="userDao" />
 		</property>
 	</bean>
-
+  <!-- 消息 -->
+  	<bean id="msgDao" class="com.hck.yanghua.server.MsgServer"
+		scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 
 	<!-- 帖子 -->
 	<bean id="tieziDao" class="com.hck.yanghua.server.TieZiServer"
@@ -118,6 +124,9 @@
 		<property name="tieZiDao">
 			<ref bean="tieziDao" />
 		</property>
+		<property name="msgDao">
+			<ref bean="msgDao" />
+		</property>
 	</bean>
 
 	<!-- 赞 -->
@@ -136,5 +145,14 @@
 		</property>
 	</bean>
 
+
+<!-- 回复 xinxi-->
+<bean id="HuiFuMsgAction" class="com.hck.yanghua.phoneaction.MsgAction"
+		scope="prototype">
+		<property name="msgDao">
+			<ref bean="msgDao" />
+		</property>
+		
+	</bean>
 
 </beans>

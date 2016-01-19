@@ -24,7 +24,7 @@ public class UserAction extends BaseAction {
 	public void loginUser() {
 		User user = null;
 		init();
-		String userId = getStringData("uid");
+		String userId = getStringData("userId");
 		int xingbie = getIntData("xingbie");
 		String touxiang = getStringData("touxiang");
 		String userName = getStringData("userName");
@@ -130,6 +130,13 @@ public class UserAction extends BaseAction {
 		init();
 		long uid=getLongData("uid");
 		User user=userDao.getUser(uid);
+		double jingdu = getDoubleData("jingdu");
+		double weidu = getDoubleData("weidu");
+		if(jingdu>0 && user!=null){
+			if (user.getJingdu()!=jingdu) {
+				userDao.updateUser(user);
+			}
+		}
 		if (user==null) {
 			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
 		}

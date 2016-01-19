@@ -19,8 +19,17 @@ public class Huitie implements java.io.Serializable {
 	private Integer type;
     private String address;
     private String huifuname;
+    private long buid;
     
-    public String getHuifuname() {
+    public long getBuid() {
+		return buid;
+	}
+
+	public void setBuid(long buid) {
+		this.buid = buid;
+	}
+
+	public String getHuifuname() {
 		return huifuname;
 	}
 

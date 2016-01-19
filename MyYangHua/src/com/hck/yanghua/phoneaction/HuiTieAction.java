@@ -8,7 +8,9 @@ import com.hck.data.contans.Contans;
 import com.hck.yanghua.bean.Huitie;
 import com.hck.yanghua.bean.Tiezi;
 import com.hck.yanghua.bean.User;
+import com.hck.yanghua.bean.Xinxi;
 import com.hck.yanghua.dao.HuiTieDao;
+import com.hck.yanghua.dao.MsgDao;
 import com.hck.yanghua.dao.TieZiDao;
 import com.hck.yanghua.util.UploadImageUtil;
 import com.hck.yanghua.util.UploadImageUtil.UpLoadImageCallBack;
@@ -17,6 +19,15 @@ import com.hck.yanghua.vo.HuiTieData;
 public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 	private HuiTieDao hDao;
 	private TieZiDao tieZiDao;
+	private MsgDao msgDao;
+
+	public MsgDao getMsgDao() {
+		return msgDao;
+	}
+
+	public void setMsgDao(MsgDao msgDao) {
+		this.msgDao = msgDao;
+	}
 
 	public TieZiDao getTieZiDao() {
 		return tieZiDao;
@@ -36,14 +47,17 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 
 	public void addHuiTie() {
 		init();
-		long uid = getLongData("uid");
+		 System.out.print("b_uid: "+request.getParameter("buid"));
+		long uid = getLongData("uid"); //回复信息的用户id
 		long tId = getLongData("tid");
 		String content = getStringData("content");
 		String address = getStringData("address");
-		String yuantie=getStringData("yunatie");
-		String userName=getStringData("userName");
+		String yuantie = getStringData("yunatie");
+		String userName = getStringData("userName");
 		int type = getIntData("type");
-
+        long b_uid=getLongData("buid"); //被回复的用户id
+        System.out.println("b_uid: "+b_uid);
+       
 		int hasImg = getIntData("hasImg");
 		Huitie huitie = null;
 		huitie = new Huitie();
@@ -56,15 +70,33 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 		user.setUid(uid);
 		huitie.setType(type);
 		huitie.setUser(user);
+		huitie.setBuid(b_uid);
 		huitie.setTime(new Timestamp(System.currentTimeMillis()).toString());
 		if (hasImg == 1) {
-			UploadImageUtil.uploadImage(request, response, this, huitie);
+			UploadImageUtil.uploadImage(request, response, this, huitie, false);
 		} else {
 			addHuiFu(huitie);
+			addHuiFuMsg(huitie);
 		}
 	}
 
-	public void onSuccess(Object data, List<String> datueList) {
+	private void addHuiFuMsg(Huitie huitie) {
+		Xinxi xinxi = new Xinxi();
+		xinxi.setContent(huitie.getContent());
+		xinxi.setIsRed(0);
+		xinxi.setTid(huitie.getTid());
+		xinxi.setTime(new Timestamp(System.currentTimeMillis()).toString());
+		xinxi.setType(huitie.getType());
+		xinxi.setYuantie(huitie.getYuanTie());
+		User user = new User();
+		user.setUid(huitie.getUser().getUid());
+		xinxi.setUser(user);
+		xinxi.setBuid(huitie.getBuid());
+		msgDao.addHuiFuMsg(xinxi);
+	}
+
+	public void onSuccess(Object data, List<String> datueList,
+			List<String> xiaotuList) {
 		if (data == null || datueList == null) {
 			onError(-1);
 			return;
@@ -87,6 +119,7 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 			}
 		}
 		addHuiFu(huitie);
+		addHuiFuMsg(huitie);
 	}
 
 	public void onError(int type) {
@@ -98,11 +131,12 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 		long id = hDao.addHuiTie(huitie);
 		if (id > 0) {
 			json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
-			Tiezi tiezi=tieZiDao.getTiezi(huitie.getTid());
-			tiezi.setPinglunsize(tiezi.getPinglunsize()+1);
-			tiezi.setHuiFuTime(new Timestamp(System.currentTimeMillis()).toString());
+			Tiezi tiezi = tieZiDao.getTiezi(huitie.getTid());
+			tiezi.setPinglunsize(tiezi.getPinglunsize() + 1);
+			tiezi.setHuiFuTime(new Timestamp(System.currentTimeMillis())
+					.toString());
 			tieZiDao.updateTiezi(tiezi);
-			
+
 		} else {
 			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
 		}

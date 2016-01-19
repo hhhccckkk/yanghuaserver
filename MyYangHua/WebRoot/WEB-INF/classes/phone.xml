@@ -62,5 +62,11 @@
 		<action name="getZan" class="ZanAction" method="getZan">
 			<result type="json">null</result>
 		</action>
+		
+		
+		<!-- 获取回复信息 -->
+		<action name="getHuiFuMsg" class="HuiFuMsgAction" method="getHuiFuMsg">
+			<result type="json">null</result>
+		</action>
 	</package>
 </struts>

@@ -42,11 +42,11 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 		tiezi.setUser(user);
 		tiezi.setContent(content);
 		tiezi.setAddress(address);
-		tiezi.setType(type);  //type 1一般分享帖子,2出售帖子
+		tiezi.setType(type); // type 1一般分享帖子,2出售帖子
 		tiezi.setUser(user);
 		int hasImage = getIntData("hasImage");
 		if (hasImage == HAS_IMAGE) { // 有图片，先上传图片
-			UploadImageUtil.uploadImage(request, response, this, tiezi);
+			UploadImageUtil.uploadImage(request, response, this, tiezi, true);
 		} else {
 			addTieZiToServer(tiezi); // 没有图片直接增加帖子信息到数据库
 		}
@@ -82,7 +82,8 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 	/**
 	 * 增加图片成功，把返回的图片地址加入帖子里面，然后增加帖子信息 datuList 原图 xiaotuList 缩略图地址
 	 */
-	public void onSuccess(Object tiezi, List<String> datuList) {
+	public void onSuccess(Object tiezi, List<String> datuList,
+			List<String> xiaotu) {
 		Tiezi tiezi2 = (Tiezi) tiezi;
 		for (int i = 0; i < datuList.size(); i++) {
 			switch (i) {
@@ -106,6 +107,18 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 				break;
 			}
 		}
+		for (int i = 0; i < xiaotu.size(); i++) {
+			switch (i) {
+			case 0:
+				tiezi2.setTupian6(xiaotu.get(0));
+				break;
+			case 1:
+				tiezi2.setTupian7(xiaotu.get(1));
+				break;
+			default:
+				break;
+			}
+		}
 		addTieZiToServer(tiezi2);
 	}
 
@@ -121,8 +134,8 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 		init();
 		int maxSize = getIntData("maxSize");
 		int page = getIntData("page");
-		int type=getIntData("type");
-		List<Tiezi> tiezis = tieZiDao.getTiezis(type,page, maxSize);
+		int type = getIntData("type");
+		List<Tiezi> tiezis = tieZiDao.getTiezis(type, page, maxSize);
 		if (tiezis == null) {
 			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
 		} else {
@@ -131,8 +144,9 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 		}
 		write();
 	}
-    //帖子按照从评论由多到少排序
-	public void getHotTieZi(){
+
+	// 帖子按照从评论由多到少排序
+	public void getHotTieZi() {
 		init();
 		int maxSize = getIntData("maxSize");
 		int page = getIntData("page");
@@ -145,7 +159,7 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 		}
 		write();
 	}
-	
+
 	private List<TieZiData> changeData(List<Tiezi> tiezis) {
 		List<TieZiData> tieZiDatas = new ArrayList<TieZiData>();
 		TieZiData tieZiData = null;

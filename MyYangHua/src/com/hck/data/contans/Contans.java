@@ -11,4 +11,5 @@ public class Contans {
 	public static final int ADD_IMAGE_ERROR_UNKNOW=2; //图片上传出问题
 	//public static final String image_path = "D:\\myeclipse_workplace\\.metadata\\.me_tcat7\\webapps\\MyYangHua\\tiezi_images\\";
 	  public static final String image_path="D:\\workplace\\.metadata\\.me_tcat7\\webapps\\MyYangHua\\tiezi_images\\";
+	  public static final String image_xiaotu_path="D:\\workplace\\.metadata\\.me_tcat7\\webapps\\MyYangHua\\tiezi_images_xiaotu\\";
 }
