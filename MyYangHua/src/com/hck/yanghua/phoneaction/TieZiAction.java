@@ -191,6 +191,7 @@ public class TieZiAction extends BaseAction implements UpLoadImageCallBack {
 			tieZiData.setName(user.getName());
 			tieZiData.setJifeng(user.getJifeng());
 			tieZiData.setFensi(user.getFensi());
+			tieZiData.setUserId(user.getUserid());
 			tieZiData.setHuiFuTime(tiezi.getHuiFuTime());
 			String address = tiezi.getAddress();
 			if (address == null || "".equals(address)) {
