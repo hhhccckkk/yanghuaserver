@@ -51,4 +51,12 @@ public class UserServer extends HibernateDaoSupport implements UserDao {
 		return (User) getHibernateTemplate().get(User.class, userId);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<User> getAllUsers() {
+		String sql="from User";
+		return getHibernateTemplate().find(sql);
+	}
+
+
+
 }

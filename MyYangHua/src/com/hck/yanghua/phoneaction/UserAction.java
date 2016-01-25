@@ -1,6 +1,9 @@
 package com.hck.yanghua.phoneaction;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import com.hck.data.contans.Contans;
 import com.hck.yanghua.bean.User;
@@ -12,6 +15,7 @@ public class UserAction extends BaseAction {
 	private static final int MAN = 1;
 	private static final int WOMAN = 2;
 	private UserDao userDao;
+	private int MAX_JULI = 1000 * 10;
 
 	public UserDao getUserDao() {
 		return userDao;
@@ -37,7 +41,6 @@ public class UserAction extends BaseAction {
 		if (user2 == null) {
 			user = new User();
 			user.setAddress(address);
-			user.setAihao("无");
 			user.setDongtai(0);
 			user.setFensi(0);
 			user.setGuanzhu(0);
@@ -54,11 +57,7 @@ public class UserAction extends BaseAction {
 			user.setLogintime(new Timestamp(System.currentTimeMillis()));
 			user.setTime(new Timestamp(System.currentTimeMillis()).toString());
 			user.setUserid(userId);
-			if (MALE==xingbie) {
-				user.setXingbie(MAN);
-			} else {
-				user.setXingbie(WOMAN);
-			}
+			user.setXingbie(xingbie);
 			user = userDao.login(user);
 			if (user == null) {
 				json.put(Contans.CODE, Contans.GET_DATA_ERROR);
@@ -99,6 +98,7 @@ public class UserAction extends BaseAction {
 			userData.setUserId(user.getUserid());
 			userData.setImei(user.getImei());
 			userData.setName(user.getName());
+			userData.setXingbie(user.getXingbie());
 		}
 		return userData;
 	}
@@ -125,26 +125,75 @@ public class UserAction extends BaseAction {
 		}
 		write();
 	}
-	
-	public void getUser(){
+
+	public void getUser() {
 		init();
-		long uid=getLongData("uid");
-		User user=userDao.getUser(uid);
+		long uid = getLongData("uid");
+		User user = userDao.getUser(uid);
 		double jingdu = getDoubleData("jingdu");
 		double weidu = getDoubleData("weidu");
-		if(jingdu>0 && user!=null){
-			if (user.getJingdu()!=jingdu) {
+		if (jingdu > 0 && user != null) {
+			if (user.getJingdu() != jingdu) {
+				user.setJingdu(jingdu);
+				user.setWeidu(weidu);
 				userDao.updateUser(user);
 			}
 		}
-		if (user==null) {
+		if (user == null) {
 			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
-		}
-		else {
+		} else {
 			json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
 			json.put("data", changeUserData(user));
 		}
 		write();
+	}
+
+	public void getUserByStringId() {
+		init();
+		String userId = getStringData("uid");
+		User user = userDao.getUser(userId);
+		if (user != null) {
+			json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
+			json.put("data", changeUserData(user));
+		} else {
+			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
+		}
+
+		write();
+	}
+
+	public void getNearUsers() {
+		init();
+		double jindu = getDoubleData("jindu");
+		double weidu = getDoubleData("weidu");
+		List<User> users = userDao.getAllUsers();
+		List<UserData> users2 = new ArrayList<UserData>();
+		for (int i = 0; i < users.size(); i++) {
+			User user = users.get(i);
+			double juli = 0;
+			juli = getDistance(jindu, weidu, user.getWeidu(), user.getJingdu());
+			if (juli < MAX_JULI) {
+				UserData userData = changeUserData(user);
+				userData.setJuli((int) juli);
+				users2.add(userData);
+			}
+		}
+		Collections.sort(users2);
+		json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
+		json.put("data", users2);
+		write();
+	}
+
+	public static double getDistance(double lat1, double longt1, double lat2,
+			double longt2) {
+		double PI = 3.14159265358979323; // 圆周率
+		double R = 6371229; // 地球的半径
+		double x, y, distance;
+		x = (longt2 - longt1) * PI * R
+				* Math.cos(((lat1 + lat2) / 2) * PI / 180) / 180;
+		y = (lat2 - lat1) * PI * R / 180;
+		distance = Math.hypot(x, y);
+		return distance;
 	}
 
 }

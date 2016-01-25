@@ -9,5 +9,6 @@ public interface MsgDao {
 	public boolean addHuiFuMsg(Xinxi xinxi);
 
 	public List<Xinxi> getHuiFuMsg(long uid,int page);
+	public boolean deleteMsg(long msgId);
 
 }

@@ -9,39 +9,24 @@ public class Xinxi implements java.io.Serializable {
 	// Fields
 
 	private Long id;
+	private Tiezi tiezi;
 	private User user;
 	private String content;
 	private Integer type;
 	private String time;
 	private String yuantie;
-    private int isRed;
-    private long tid;
-    private long buid;
+	private Integer isred;
+	private Long buid;
+    private int saleOrNorm;
     
 	// Constructors
 
-	public long getBuid() {
-		return buid;
+	public int getSaleOrNorm() {
+		return saleOrNorm;
 	}
 
-	public void setBuid(long buid) {
-		this.buid = buid;
-	}
-
-	public long getTid() {
-		return tid;
-	}
-
-	public void setTid(long tid) {
-		this.tid = tid;
-	}
-
-	public int getIsRed() {
-		return isRed;
-	}
-
-	public void setIsRed(int isRed) {
-		this.isRed = isRed;
+	public void setSaleOrNorm(int saleOrNorm) {
+		this.saleOrNorm = saleOrNorm;
 	}
 
 	/** default constructor */
@@ -49,13 +34,16 @@ public class Xinxi implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Xinxi(User user, String content, Integer type, String time,
-			String yuantie) {
+	public Xinxi(Tiezi tiezi, User user, String content, Integer type,
+			String time, String yuantie, Integer isred, Long buid) {
+		this.tiezi = tiezi;
 		this.user = user;
 		this.content = content;
 		this.type = type;
 		this.time = time;
 		this.yuantie = yuantie;
+		this.isred = isred;
+		this.buid = buid;
 	}
 
 	// Property accessors
@@ -66,6 +54,14 @@ public class Xinxi implements java.io.Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Tiezi getTiezi() {
+		return this.tiezi;
+	}
+
+	public void setTiezi(Tiezi tiezi) {
+		this.tiezi = tiezi;
 	}
 
 	public User getUser() {
@@ -106,6 +102,22 @@ public class Xinxi implements java.io.Serializable {
 
 	public void setYuantie(String yuantie) {
 		this.yuantie = yuantie;
+	}
+
+	public Integer getIsred() {
+		return this.isred;
+	}
+
+	public void setIsred(Integer isred) {
+		this.isred = isred;
+	}
+
+	public Long getBuid() {
+		return this.buid;
+	}
+
+	public void setBuid(Long buid) {
+		this.buid = buid;
 	}
 
 }

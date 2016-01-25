@@ -1,5 +1,7 @@
 package com.hck.yanghua.dao;
 
+import java.util.List;
+
 import com.hck.yanghua.bean.User;
 
 public interface UserDao {
@@ -9,5 +11,6 @@ public interface UserDao {
 	public User getUser(Long userId);
 	public User getUser(String userId);
 	public boolean updateUser(User user);
+	public List<User> getAllUsers();
 
 }

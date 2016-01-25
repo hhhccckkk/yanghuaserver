@@ -1,9 +1,8 @@
 package com.hck.yanghua.vo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
-public class UserData implements Serializable{
+public class UserData implements Serializable,Comparable<UserData>{
 	private Long uid;
 	private String name;
 	private String password;
@@ -23,7 +22,14 @@ public class UserData implements Serializable{
 	private String logintime;
 	private String userId;
 	private String imei;
+	private int juli;
 	
+	public int getJuli() {
+		return juli;
+	}
+	public void setJuli(int juli) {
+		this.juli = juli;
+	}
 	public String getImei() {
 		return imei;
 	}
@@ -137,6 +143,10 @@ public class UserData implements Serializable{
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	
+	public int compareTo(UserData o) {
+		return this.juli-o.getJuli();
 	}
 	
 

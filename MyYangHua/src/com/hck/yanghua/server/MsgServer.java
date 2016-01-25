@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.hck.yanghua.bean.Tiezi;
 import com.hck.yanghua.bean.Xinxi;
 import com.hck.yanghua.dao.MsgDao;
+import com.hck.yanghua.vo.MsgData;
 
 public class MsgServer extends HibernateDaoSupport implements MsgDao {
 
@@ -41,6 +42,16 @@ public class MsgServer extends HibernateDaoSupport implements MsgDao {
 		String sql = "from Xinxi xinxi where xinxi.buid=" + uid
 				+ " order by xinxi.id desc";
 		return getList(sql, page, 20);
+	}
+
+	public boolean deleteMsg(long msgId) {
+		try {
+			Xinxi msgData=(Xinxi) getHibernateTemplate().get(Xinxi.class, msgId);
+			getHibernateTemplate().delete(msgData);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

@@ -47,17 +47,14 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 
 	public void addHuiTie() {
 		init();
-		 System.out.print("b_uid: "+request.getParameter("buid"));
 		long uid = getLongData("uid"); //回复信息的用户id
 		long tId = getLongData("tid");
 		String content = getStringData("content");
 		String address = getStringData("address");
 		String yuantie = getStringData("yunatie");
 		String userName = getStringData("userName");
-		int type = getIntData("type");
+		int type = getIntData("type");  //1,回帖,2回复用户
         long b_uid=getLongData("buid"); //被回复的用户id
-        System.out.println("b_uid: "+b_uid);
-       
 		int hasImg = getIntData("hasImg");
 		Huitie huitie = null;
 		huitie = new Huitie();
@@ -65,7 +62,7 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 		huitie.setAddress(address);
 		huitie.setContent(content);
 		huitie.setHuifuname(userName);
-		huitie.setYuanTie(yuantie);
+	    huitie.setYuanTie(yuantie);
 		User user = new User();
 		user.setUid(uid);
 		huitie.setType(type);
@@ -75,16 +72,23 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 		if (hasImg == 1) {
 			UploadImageUtil.uploadImage(request, response, this, huitie, false);
 		} else {
+			if (uid!=b_uid) {
+				addHuiFuMsg(huitie,hasImg);
+			}
 			addHuiFu(huitie);
-			addHuiFuMsg(huitie);
+			
 		}
 	}
 
-	private void addHuiFuMsg(Huitie huitie) {
+	private void addHuiFuMsg(Huitie huitie,int hasImg) {
 		Xinxi xinxi = new Xinxi();
+		if (hasImg==1) {
+			xinxi.setContent(huitie.getContent()+" [图片]");
+		}
 		xinxi.setContent(huitie.getContent());
-		xinxi.setIsRed(0);
-		xinxi.setTid(huitie.getTid());
+		Tiezi tiezi=new Tiezi();
+		tiezi.setTid(huitie.getTid());
+		xinxi.setTiezi(tiezi);
 		xinxi.setTime(new Timestamp(System.currentTimeMillis()).toString());
 		xinxi.setType(huitie.getType());
 		xinxi.setYuantie(huitie.getYuanTie());
@@ -92,6 +96,7 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 		user.setUid(huitie.getUser().getUid());
 		xinxi.setUser(user);
 		xinxi.setBuid(huitie.getBuid());
+		xinxi.setSaleOrNorm(huitie.getType());
 		msgDao.addHuiFuMsg(xinxi);
 	}
 
@@ -119,7 +124,7 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 			}
 		}
 		addHuiFu(huitie);
-		addHuiFuMsg(huitie);
+		addHuiFuMsg(huitie,1);
 	}
 
 	public void onError(int type) {
@@ -128,6 +133,9 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 	}
 
 	private void addHuiFu(Huitie huitie) {
+		if (huitie.getType()==1) {
+			huitie.setYuanTie(null);
+		}
 		long id = hDao.addHuiTie(huitie);
 		if (id > 0) {
 			json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);

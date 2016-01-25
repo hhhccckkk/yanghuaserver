@@ -70,19 +70,19 @@
         <property name="pushid" type="java.lang.String">
             <column name="pushid" />
         </property>
-        <set name="tiezis" inverse="true">
+        <set name="tiezis" inverse="true" >
             <key>
                 <column name="uid" />
             </key>
             <one-to-many class="com.hck.yanghua.bean.Tiezi" />
         </set>
-        <set name="huities" inverse="true">
+        <set name="huities" inverse="true" >
             <key>
                 <column name="uid" />
             </key>
             <one-to-many class="com.hck.yanghua.bean.Huitie" />
         </set>
-        <set name="pingluns" inverse="true">
+        <set name="pingluns" inverse="true" >
             <key>
                 <column name="uid" />
             </key>

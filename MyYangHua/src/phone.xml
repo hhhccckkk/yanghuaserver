@@ -31,7 +31,15 @@
 		<action name="getUser" class="UserAction" method="getUser">
 			<result type="json">null</result>
 		</action>
+		<action name="getUserByStringId" class="UserAction" method="getUserByStringId">
+			<result type="json">null</result>
+		</action>
+		<!-- 获取附近的人 -->
+		<action name="getNearUsers" class="UserAction" method="getNearUsers">
+			<result type="json">null</result>
+		</action>
 
+	
 		<!-- 贴子 -->
 		<action name="addTieZi" class="TieZiAction" method="addTieZi">
 			<result type="json">null</result>
@@ -40,7 +48,7 @@
 		<action name="getTieZi" class="TieZiAction" method="getTieZi">
 			<result type="json">null</result>
 		</action>
-			<!-- 获取帖子信息  从热门排序-->
+		<!-- 获取帖子信息 从热门排序 -->
 		<action name="getHotTieZi" class="TieZiAction" method="getHotTieZi">
 			<result type="json">null</result>
 		</action>
@@ -62,11 +70,27 @@
 		<action name="getZan" class="ZanAction" method="getZan">
 			<result type="json">null</result>
 		</action>
-		
-		
+
+
 		<!-- 获取回复信息 -->
 		<action name="getHuiFuMsg" class="HuiFuMsgAction" method="getHuiFuMsg">
 			<result type="json">null</result>
 		</action>
+		<action name="deleteMsg" class="HuiFuMsgAction" method="deleteHuiFuMsg">
+			<result type="json">null</result>
+		</action>
+
+
+		<!-- 好友 -->
+		<action name="addFriend" class="FriendAction" method="addFriend">
+			<result type="json">null</result>
+		</action>
+		<!-- 获取好友 -->
+		<action name="getFriend" class="FriendAction" method="getFriends">
+			<result type="json">null</result>
+		</action>
+
+
+
 	</package>
 </struts>

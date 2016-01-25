@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hck.data.contans.Contans;
+import com.hck.yanghua.bean.Tiezi;
+import com.hck.yanghua.bean.User;
 import com.hck.yanghua.bean.Xinxi;
 import com.hck.yanghua.dao.MsgDao;
 import com.hck.yanghua.vo.MsgData;
@@ -38,17 +40,46 @@ public class MsgAction extends BaseAction {
 			msgData = new MsgData();
 			msgData.setContent(xinxi.getContent());
 			msgData.setId(xinxi.getId());
-			msgData.setIsRed(xinxi.getIsRed());
-			msgData.setTid(xinxi.getTid());
+			
 			msgData.setTime(xinxi.getTime());
 			msgData.setTouxiang(xinxi.getUser().getTouxiang());
 			msgData.setType(xinxi.getType());
 			msgData.setUid(xinxi.getUser().getUid());
 			msgData.setUserName(xinxi.getUser().getName());
 			msgData.setYuantie(xinxi.getYuantie());
+			msgData.setUserMsgId(xinxi.getUser().getUserid());
+			
+			Tiezi tiezi=xinxi.getTiezi();
+			User user=tiezi.getUser();
+			msgData.setXingbie(user.getXingbie());
+			msgData.setAddress(user.getAddress());
+			msgData.setFensi(user.getFensi());
+			msgData.setFatieTime(tiezi.getTime());
+			msgData.setImage1(tiezi.getTupian1());
+			msgData.setImage2(tiezi.getTupian2());
+			msgData.setImage3(tiezi.getTupian3());
+			msgData.setImage4(tiezi.getTupian4());
+			msgData.setImage5(tiezi.getTupian5());
+			msgData.setTid(tiezi.getTid());
+			msgData.setTieziUserName(user.getName());
+			msgData.setFatieUserTX(user.getTouxiang());
 			msgDatas.add(msgData);
 		}
 		return msgDatas;
+	}
+
+	public void deleteHuiFuMsg() {
+		init();
+		long msgId = getLongData("msgId");
+		System.out.println("deleteHuiFuMsg: "+msgId);
+		boolean b = msgDao.deleteMsg(msgId);
+		if (b) {
+			json.put(Contans.CODE, Contans.GET_DATA_SUCCESS);
+		} else {
+			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
+		}
+
+		write();
 	}
 
 }

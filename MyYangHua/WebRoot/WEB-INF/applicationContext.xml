@@ -18,7 +18,7 @@
 		</property>
 		<property name="hibernateProperties">
 			<props>
-			<!--  <prop key="hibernate.hbm2ddl.auto">create</prop> --> 
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
 				<prop key="hibernate.dialect">
 					org.hibernate.dialect.MySQLDialect
 				</prop>
@@ -42,6 +42,7 @@
 				<value>com/hck/yanghua/bean/User.hbm.xml</value>
 				<value>com/hck/yanghua/bean/Xinxi.hbm.xml</value>
 				<value>com/hck/yanghua/bean/Zan.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Friend.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -86,9 +87,8 @@
 			<ref bean="userDao" />
 		</property>
 	</bean>
-  <!-- 消息 -->
-  	<bean id="msgDao" class="com.hck.yanghua.server.MsgServer"
-		scope="prototype">
+	<!-- 消息 -->
+	<bean id="msgDao" class="com.hck.yanghua.server.MsgServer" scope="prototype">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
@@ -146,13 +146,29 @@
 	</bean>
 
 
-<!-- 回复 xinxi-->
-<bean id="HuiFuMsgAction" class="com.hck.yanghua.phoneaction.MsgAction"
+	<!-- 回复 xinxi -->
+	<bean id="HuiFuMsgAction" class="com.hck.yanghua.phoneaction.MsgAction"
 		scope="prototype">
 		<property name="msgDao">
 			<ref bean="msgDao" />
 		</property>
-		
-	</bean>
 
+	</bean>
+	
+	<!-- 好友dao -->
+	<bean id="friendDao" class="com.hck.yanghua.server.FriendServer" scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 好友server -->
+		<bean id="FriendAction" class="com.hck.yanghua.phoneaction.FriendAction"
+		scope="prototype">
+		<property name="friendDao">
+			<ref bean="friendDao" />
+		</property>
+	<property name="userDao">
+			<ref bean="userDao" />
+		</property>
+	</bean>
 </beans>
