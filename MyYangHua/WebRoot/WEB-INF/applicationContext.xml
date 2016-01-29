@@ -43,6 +43,8 @@
 				<value>com/hck/yanghua/bean/Xinxi.hbm.xml</value>
 				<value>com/hck/yanghua/bean/Zan.hbm.xml</value>
 				<value>com/hck/yanghua/bean/Friend.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Huodong.hbm.xml</value>
+				<value>com/hck/yanghua/bean/Guanzhu.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -73,7 +75,13 @@
 			<ref bean="banbenDao" />
 		</property>
 	</bean>
-
+ <!-- 关注dao -->
+ 	<bean id="guanzhuDao" class="com.hck.yanghua.server.GuanZhuServer"
+		scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	<!-- 用户 -->
 	<bean id="userDao" class="com.hck.yanghua.server.UserServer"
 		scope="prototype">
@@ -143,32 +151,70 @@
 		<property name="tieZiDao">
 			<ref bean="tieziDao" />
 		</property>
+		<property name="msgDao">
+			<ref bean="msgDao" />
+		</property>
 	</bean>
 
 
 	<!-- 回复 xinxi -->
 	<bean id="HuiFuMsgAction" class="com.hck.yanghua.phoneaction.MsgAction"
 		scope="prototype">
-		<property name="msgDao">
+		<property name="msgDao">  
 			<ref bean="msgDao" />
 		</property>
-
+       <property name="guanZhuDao">   
+			<ref bean="guanzhuDao" />
+		</property>
 	</bean>
-	
+
 	<!-- 好友dao -->
-	<bean id="friendDao" class="com.hck.yanghua.server.FriendServer" scope="prototype">
+	<bean id="friendDao" class="com.hck.yanghua.server.FriendServer"
+		scope="prototype">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 	<!-- 好友server -->
-		<bean id="FriendAction" class="com.hck.yanghua.phoneaction.FriendAction"
+	<bean id="FriendAction" class="com.hck.yanghua.phoneaction.FriendAction"
 		scope="prototype">
 		<property name="friendDao">
 			<ref bean="friendDao" />
 		</property>
-	<property name="userDao">
+		<property name="userDao">
 			<ref bean="userDao" />
 		</property>
 	</bean>
+
+
+	<!-- 活动 -->
+	<bean id="huodongDao" class="com.hck.yanghua.server.HuoDongServer"
+		scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="HuoDongAction" class="com.hck.yanghua.phoneaction.HuoDongAction"
+		scope="prototype">
+		<property name="huoDongDao">
+			<ref bean="huodongDao" />
+		</property>
+		<property name="userDao">
+			<ref bean="userDao" />
+		</property>
+	</bean>
+	
+	
+	<!-- 关注 -->
+	<bean id="GuanZhuAction" class="com.hck.yanghua.phoneaction.GuanZhuAction"
+		scope="prototype">
+		<property name="guanZhuDao">
+			<ref bean="guanzhuDao" />
+		</property>
+			<property name="userDao">
+			<ref bean="userDao" />
+		</property>
+	</bean>
+	
+	
 </beans>

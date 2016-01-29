@@ -39,7 +39,7 @@
 			<result type="json">null</result>
 		</action>
 
-	
+
 		<!-- 贴子 -->
 		<action name="addTieZi" class="TieZiAction" method="addTieZi">
 			<result type="json">null</result>
@@ -90,7 +90,35 @@
 			<result type="json">null</result>
 		</action>
 
+		<!-- 获取活动信息 -->
+		<action name="getHuoDongs" class="HuoDongAction" method="getHuoDongs">
+			<result type="json">null</result>
+		</action>
+		<!-- 获取活动url -->
+		<action name="getHuoDongUrl" class="HuoDongAction" method="getHuoDongUrl">
+			<result type="json">null</result>
+		</action>
+		<!-- 获取兑换url -->
+		<action name="getDuiHuanUrl" class="HuoDongAction" method="getDuiHuanUrl">
+			<result type="json">null</result>
+		</action>
 
+		<!-- 增加关注 -->
+		<action name="addGuanZhu" class="GuanZhuAction" method="addGuanZhu">
+			<result type="json">null</result>
+		</action>
+		<!-- 删除关注 -->
+		<action name="deleteGuanZhu" class="GuanZhuAction" method="deleteGuanZhu">
+			<result type="json">null</result>
+		</action>
+		<!-- 获取关注ids -->
+		<action name="getGuanZhuId" class="GuanZhuAction" method="getGuanZhuIds">
+			<result type="json">null</result>
+		</action>
 
+		<!-- 获取消息大小 -->
+		<action name="getMsgSize" class="HuiFuMsgAction" method="getMsgSize">
+			<result type="json">null</result>
+		</action>
 	</package>
 </struts>

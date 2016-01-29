@@ -24,7 +24,7 @@ public class HuiTieServer extends HibernateDaoSupport implements HuiTieDao {
 
 	public List<Huitie> getHuiTie(long tid, int page, int maxSize) {
 		String sql = "from Huitie ht where ht.tid=" + tid
-				+ " order by ht.id asc";
+				+ " order by ht.id desc";
 		return getList(sql, page, maxSize);
 	}
 

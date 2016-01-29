@@ -46,12 +46,23 @@ public class MsgServer extends HibernateDaoSupport implements MsgDao {
 
 	public boolean deleteMsg(long msgId) {
 		try {
-			Xinxi msgData=(Xinxi) getHibernateTemplate().get(Xinxi.class, msgId);
+			Xinxi msgData = (Xinxi) getHibernateTemplate().get(Xinxi.class,
+					msgId);
 			getHibernateTemplate().delete(msgData);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public long getMsgSize(long uid) {
+		String sql = "from Xinxi xinxi where xinxi.buid=" + uid
+				+ " order by xinxi.id desc";
+		List<Xinxi> xinxis = getHibernateTemplate().find(sql);
+		if (xinxis != null && !xinxis.isEmpty()) {
+			return xinxis.get(0).getId();
+		}
+		return 0;
 	}
 
 }

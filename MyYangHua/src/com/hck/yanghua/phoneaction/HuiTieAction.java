@@ -93,6 +93,7 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 		xinxi.setType(huitie.getType());
 		xinxi.setYuantie(huitie.getYuanTie());
 		User user = new User();
+		xinxi.setIsred(0);
 		user.setUid(huitie.getUser().getUid());
 		xinxi.setUser(user);
 		xinxi.setBuid(huitie.getBuid());
@@ -124,7 +125,10 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 			}
 		}
 		addHuiFu(huitie);
-		addHuiFuMsg(huitie,1);
+		if (huitie.getBuid()!=huitie.getUser().getUid()) {
+			addHuiFuMsg(huitie,1);
+		}
+		
 	}
 
 	public void onError(int type) {
@@ -188,6 +192,7 @@ public class HuiTieAction extends BaseAction implements UpLoadImageCallBack {
 			huiTieData.setName(huitie.getUser().getName());
 			huiTieData.setUid(huitie.getUser().getUid());
 			huiTieData.setTouxiang(huitie.getUser().getTouxiang());
+			huiTieData.setUserIdString(huitie.getUser().getUserid());
 			if (huitie.getUser().getXingbie() == 1) { // 1ÄÐ
 				huiTieData.setNan(true);
 			} else {

@@ -12,4 +12,19 @@ public class Contans {
 	//public static final String image_path = "D:\\myeclipse_workplace\\.metadata\\.me_tcat7\\webapps\\MyYangHua\\tiezi_images\\";
 	  public static final String image_path="D:\\workplace\\.metadata\\.me_tcat7\\webapps\\MyYangHua\\tiezi_images\\";
 	  public static final String image_xiaotu_path="D:\\workplace\\.metadata\\.me_tcat7\\webapps\\MyYangHua\\tiezi_images_xiaotu\\";
+	  
+	  
+	  
+	// 对吧key和id
+		public static final String DUIHUANG_BA_KEY = "3GnY3bVw9mj9FcwVucNRzzXZ64Y8";
+		public static final String DUIHUANG_BA_Secret = "38MqFCgrQU1Ew6EntFjUPMuJvVXh";
+		/**
+		 * order type
+		 */
+		public static int ORDER_ORDER=1;  //订单
+		public static int ORDER_HUODONG=2;  //抽奖活动
+		public static String ERROR_MSG="审核不通过";
+		public static int DUIHUAN_SUCCESS=1;  //订单处理成功
+		public static int DUIHUAN_ERROR_SHEHE=2; //订单审核不通过
+		public static int DUIHUAN_ERROR_OTHER=3; //其他原因兑换失败
 }

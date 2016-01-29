@@ -18,7 +18,14 @@ public class HuiTieData{
     private int fensi;
     private String yuanTie;
     private String huifuUserName;
+    private String userIdString;
     
+	public String getUserIdString() {
+		return userIdString;
+	}
+	public void setUserIdString(String userIdString) {
+		this.userIdString = userIdString;
+	}
 	public String getHuifuUserName() {
 		return huifuUserName;
 	}

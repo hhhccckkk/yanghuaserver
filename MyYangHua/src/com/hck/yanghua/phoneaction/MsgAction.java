@@ -7,11 +7,22 @@ import com.hck.data.contans.Contans;
 import com.hck.yanghua.bean.Tiezi;
 import com.hck.yanghua.bean.User;
 import com.hck.yanghua.bean.Xinxi;
+import com.hck.yanghua.dao.GuanZhuDao;
 import com.hck.yanghua.dao.MsgDao;
+import com.hck.yanghua.util.Log;
 import com.hck.yanghua.vo.MsgData;
 
 public class MsgAction extends BaseAction {
 	private MsgDao msgDao;
+    private GuanZhuDao guanZhuDao;
+    
+	public GuanZhuDao getGuanZhuDao() {
+		return guanZhuDao;
+	}
+
+	public void setGuanZhuDao(GuanZhuDao guanZhuDao) {
+		this.guanZhuDao = guanZhuDao;
+	}
 
 	public MsgDao getMsgDao() {
 		return msgDao;
@@ -79,6 +90,17 @@ public class MsgAction extends BaseAction {
 			json.put(Contans.CODE, Contans.GET_DATA_ERROR);
 		}
 
+		write();
+	}
+	
+	public void getMsgSize(){
+		Log.log("getMsgSize: ");
+		init();
+		long uid=getLongData("uid");
+		long id=guanZhuDao.getMaxId(uid);
+		long msgId=msgDao.getMsgSize(uid);
+		json.put("tz", msgId);
+		json.put("gz", id);
 		write();
 	}
 
